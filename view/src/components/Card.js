@@ -1,19 +1,22 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
+import '../css/Card.css';
 
-import '../css/Card.css'
+function Card(props) {
 
-function Card({ src, title, description, price}) {
+	const { src, title, description, price } = props;
+
 	return (
 		<div className="card">
-			<img src={src} alt=""/>
+			<img src={src} alt="" />
 			<div className="card_text">
 				<h2>{title}</h2>
 				<h5>{description}</h5>
 				<h3>{price}</h3>
 			</div>
-			
+
 		</div>
-	)
+	);
 }
 
-export default Card
+export default Card;
