@@ -4,6 +4,8 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
+const authRouter = require('./routes/auth');
+const userRouter = require('./routes/users');
 const roomRouter = require('./routes/rooms');
 
 // Import environmental variables from .env file
@@ -31,6 +33,8 @@ app.get('/', (req, res) => {
   res.send({ message: 'Hello world!' });
 });
 
+app.use('/', authRouter);
+app.use('/users', userRouter);
 app.use('/rooms', roomRouter);
 
 app.listen(PORT, () => {

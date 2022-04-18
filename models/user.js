@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 // Recommended value for this is 10, read bcrypt docs for more info 
-// const SALTROUNDS = 10;
+const SALTROUNDS = 10;
 
 const userSchema = mongoose.Schema({
 
@@ -40,16 +40,16 @@ const userSchema = mongoose.Schema({
 });
 
 
-// // Hash the password before saving, but only if a password is created or modified
-// userSchema.pre('save', async function () {
+// Hash the password before saving, but only if a password is created or modified
+userSchema.pre('save', async function () {
 
-//   try {
-//     if (this.isModified('password')) {
-//       this.password = await bcrypt.hash(this.password, SALTROUNDS);
-//     }
-//   } catch (err) {
-//     throw new Error('Something went wrong with your password');
-//   }
-// });
+  try {
+    if (this.isModified('password')) {
+      this.password = await bcrypt.hash(this.password, SALTROUNDS);
+    }
+  } catch (err) {
+    throw new Error('Something went wrong with your password');
+  }
+});
 
 module.exports = mongoose.model('User', userSchema);
