@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const listingSchema = mongoose.Schema({
+const roomSchema = mongoose.Schema({
 
   name: {
     type: String,
@@ -33,4 +33,4 @@ const listingSchema = mongoose.Schema({
   versionKey: false
 });
 
-module.exports = mongoose.model('Listing', listingSchema);
+module.exports = mongoose.model('Room', roomSchema);
