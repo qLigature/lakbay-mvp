@@ -1,0 +1,33 @@
+.banner {
+	height: 70vh;
+	position: relative;
+	background: url(../img/background2.png) center;
+}
+
+.banner_calendarButton {
+	background-color: white !important;
+	color: #ff5757 !important;
+	font-weight: 800 !important;
+}
+
+.banner_text {
+	background-color: black;
+	color: #E1F0E5;
+	padding-top: 20vh;
+	padding-left: 30px;
+	padding-right: 50px;
+	padding-bottom: 70px;
+	width:  300px;
+}
+
+.banner_text > button {
+	background-color: #ff5757;
+	color: #E1F0E5;
+	margin-top: 20px;
+	font-weight: 600;
+}
+
+.banner_text > button:hover {
+	background-color: white;
+	color: #ff5757;
+}
