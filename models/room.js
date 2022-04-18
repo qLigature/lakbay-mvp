@@ -13,7 +13,7 @@ const roomSchema = mongoose.Schema({
   //   required: true
   // },
 
-  short_address: {
+  shortAddress: {
     type: String,
     required: true
   },

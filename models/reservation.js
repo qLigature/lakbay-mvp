@@ -11,8 +11,8 @@ const reservationSchema = mongoose.Schema({
 
   // status: {
   //   type: String,
-  //   enum: ['pending', 'finished', 'cancelled'],
-  //   default: 'pending'
+  //   enum: ['booked', 'finished', 'cancelled'],
+  //   default: 'booked'
   // },
 
   reservations: [{
@@ -29,7 +29,7 @@ const reservationSchema = mongoose.Schema({
     },
 
     // Will be copied from listing reference
-    short_address: {
+    shortAddress: {
       type: String,
       required: true
     },
@@ -50,12 +50,12 @@ const reservationSchema = mongoose.Schema({
     type: Date,
     immutable: true,
     default: () => Date.now()
-  },
-
-  updatedAt: {
-    type: Date,
-    default: () => Date.now()
   }
+
+  // updatedAt: {
+  //   type: Date,
+  //   default: () => Date.now()
+  // }
 }, {
   versionKey: false
 });

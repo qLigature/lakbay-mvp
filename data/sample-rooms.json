@@ -1,22 +1,38 @@
 [
   {
+    "_id": "625d0d78ee2903768ea8a218",
     "name": "Ribeira Charming Duplex",
-    "short_address": "Porto, Portugal",
-    "price": 80.0
+    "shortAddress": "Porto, Portugal",
+    "price": 80,
+    "isAvailable": true,
+    "createdAt": "2022-04-18T07:04:24.784Z",
+    "updatedAt": "2022-04-18T07:04:24.784Z"
   },
   {
+    "_id": "625d0da7122ead95d092e3a5",
     "name": "Horto Flat with Small Garden",
-    "short_address": "Rio de Janeiro, Brazil",
-    "price": 317.0
+    "shortAddress": "Rio de Janeiro, Brazil",
+    "price": 317,
+    "isAvailable": true,
+    "createdAt": "2022-04-18T07:05:11.358Z",
+    "updatedAt": "2022-04-18T07:05:11.358Z"
   },
   {
+    "_id": "625d0db3122ead95d092e3a7",
     "name": "Private Room in Bushwick",
-    "short_address": "New York, United States",
-    "price": 40.0
+    "shortAddress": "New York, United States",
+    "price": 40,
+    "isAvailable": true,
+    "createdAt": "2022-04-18T07:05:23.983Z",
+    "updatedAt": "2022-04-18T07:05:23.983Z"
   },
   {
+    "_id": "625d0de9122ead95d092e3a9",
     "name": "Copacabana Apartment Posto 6",
-    "short_address": "Rio de Janeiro, Brazil",
-    "price": 119.0
+    "shortAddress": "Rio de Janeiro, Brazil",
+    "price": 119,
+    "isAvailable": true,
+    "createdAt": "2022-04-18T07:06:17.964Z",
+    "updatedAt": "2022-04-18T07:06:17.964Z"
   }
 ]
