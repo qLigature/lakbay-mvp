@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Ribeira Charming Duplex",
+    "short_address": "Porto, Portugal",
+    "price": 80.0
+  },
+  {
+    "name": "Horto Flat with Small Garden",
+    "short_address": "Rio de Janeiro, Brazil",
+    "price": 317.0
+  },
+  {
+    "name": "Private Room in Bushwick",
+    "short_address": "New York, United States",
+    "price": 40.0
+  },
+  {
+    "name": "Copacabana Apartment Posto 6",
+    "short_address": "Rio de Janeiro, Brazil",
+    "price": 119.0
+  }
+]
