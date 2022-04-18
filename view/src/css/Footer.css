@@ -1,11 +1,11 @@
 .footer {
-	border-top: 1px solid black;
-	padding: 20px;
-	background-color: #fffaf6;
-	text-align: center;
+  border-top: 1px solid black;
+  padding: 20px;
+  background-color: #fffaf6;
+  text-align: center;
 }
 
 .footer > p {
-	padding: 5px;
-	font-size: 14px;
+  padding: 5px;
+  font-size: 14px;
 }
