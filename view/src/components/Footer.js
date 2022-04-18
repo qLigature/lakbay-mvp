@@ -12,25 +12,24 @@ function Footer() {
 	return (
 		<div className='footer d-flex align-items-center justify-content-between px-5'>
 			<div className="d-flex align-items-center">
-		    	<p>© 2022 The GetAway Inc. · Privacy · Terms</p>
-
-{/*		    	
-		    	<Button as={Link} to="/Home">Privacy</Button>
+		    	<p>© 2022 The GetAway Inc.{/* · Privacy · Terms*/}</p>
+	    	
+		    	{/*<Button as={Link} to="/Home">Privacy</Button>
 		    	<p>·</p>
 		    	<Button as={Link} to="/Home">Terms</Button>
-		    	<p>·</p>
-*/}
+		    	<p>·</p>*/}
+
 			</div>
 
 			<div className="d-flex align-items-center justify-content-between px-1">
 
-				<Button variant="outlined" href="https://fb.com">
+				<Button variant="outlined" formtarget="_blank" href="https://fb.com">
 					<FbIcon />
 				</Button>
-				<Button variant="outlined" href="https://twitter.com">
+				<Button variant="outlined" formtarget="_blank" href="https://twitter.com">
 					<TwitterIcon />
 				</Button>
-				<Button variant="outlined" href="https://instagram.com">
+				<Button variant="outlined" formtarget="_blank" href="https://instagram.com">
 					<IgIcon/>
 				</Button>
 
