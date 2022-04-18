@@ -1,24 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Container } from 'react-bootstrap'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from './pages/Home';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SearchPage from './pages/SearchPage';
+import './App.css';
+
+
 
 function App() {
-
-  const [data, setData] = useState('Loading...');
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('http://localhost:9000/');
-      console.log(response);
-      const result = await response.json();
-      setData(result.message);
-    }
-    fetchData();
-  }, []);
-
   return (
-    <>
-      <h1>{data}</h1>
-    </>
+
+    <div className="app">
+      <Header/>
+      <Container fluid>
+        <Router>
+   
+          <Routes>
+              <Route exact path= "/" element={<Home/>}/>
+              <Route exact path= "/search" element={<SearchPage/>}/>
+    {/*          <Route exact path= "/register" element={<Register/>}/>
+              <Route exact path= "/login" element={<Login/>}/>
+              <Route exact path= "/logout" element={<Logout/>}/>*/}
+    {/*          <Route exact path= "*" element={<Error/>}/>*/}
+          </Routes>
+
+      </Router>
+    </Container>
+    <Footer/>
+      
+
+
+    </div>
+
+
+
   );
 }
 
 export default App;
+
