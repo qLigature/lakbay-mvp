@@ -9,16 +9,16 @@ const reservationSchema = mongoose.Schema({
     required: true
   },
 
-  // status: {
-  //   type: String,
-  //   enum: ['booked', 'finished', 'cancelled'],
-  //   default: 'booked'
-  // },
+  status: {
+    type: String,
+    enum: ['booked', 'fulfilled', 'cancelled'],
+    default: 'booked'
+  },
 
   reservations: [{
-    listingId: {
+    roomId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Listing',
+      ref: 'Room',
       required: true
     },
 

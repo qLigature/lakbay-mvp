@@ -88,3 +88,34 @@ exports.clearBooking = async (req, res, next) => {
   }
 
 };
+
+// User confirms their booking and creates a reservation
+exports.confirmBooking = async (req, res, next) => {
+
+  try {
+    const booking = await Booking.findOne({ userId: req.user.id });
+    if (!booking) {
+      return res.status(404).send({
+        message: 'Booking not found'
+      });
+    }
+
+    const reservation = new Reservation({
+      userId: req.user.id,
+      status: 'booked',
+      reservations: booking.reservations,
+      totalPrice: booking.totalPrice
+    });
+
+    await reservation.save();
+    await Booking.deleteOne({ userId: req.user.id });
+
+    res.status(200).json({
+      message: 'Booking complete, you have successfully reserved a room'
+    });
+
+  } catch (error) {
+    return next(error);
+  }
+
+};
