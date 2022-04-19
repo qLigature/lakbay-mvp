@@ -8,6 +8,7 @@ const { verifyToken } = require('./middleware/verify-token');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/users');
 const roomRouter = require('./routes/rooms');
+const bookingRouter = require('./routes/bookings');
 const adminRouter = require('./routes/admin');
 
 const errorHandler = require('./middleware/error-handler');
@@ -41,6 +42,7 @@ app.get('/', (req, res) => {
 app.use('/', authRouter);
 app.use('/users', userRouter);
 app.use('/rooms', roomRouter);
+app.use('/bookings', bookingRouter);
 app.use('/admin', adminRouter);
 app.use(errorHandler);
 

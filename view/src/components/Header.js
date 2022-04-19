@@ -1,22 +1,22 @@
 import React from 'react';
 import { Button, Col } from 'react-bootstrap';
 import '../css/Header.css';
-import logo from '../img/logo1.png';
-import SearchIcon from '@mui/icons-material/Search';
+import logo from '../img/logo.png';
+// import SearchIcon from '@mui/icons-material/Search';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 function Header() {
 	return (
+
 		<div className="header d-flex align-items-center justify-content-between">
 			<a href="/">
-				<img className="mx-4 my-2 header_logo" src={logo} alt="The GetAway Logo" />
+				<img className="mx-4 my-2 header_logo" src={logo} alt="Lakbay Logo" />
 			</a>
 
-
-			<div className="header_searchBar d-flex align-items-center">
+			{/* <div className="header_searchBar d-flex align-items-center">
 				<input type="text" />
 				<SearchIcon />
-			</div>
+			</div> */}
 
 			<div className="header_avatar d-flex align-items-center">
 				<Button className="hostBtn" variant="outlined" href="/host">

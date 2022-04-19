@@ -11,15 +11,14 @@ function Banner() {
 
 	return (
 		<div className="banner">
-			<div className="banner_calendar d-flex flex-column">
 
-
+			{/* <div className="banner_calendar d-flex flex-column">
 				<Button onClick={() => setShowCalendar(!showCalendar)} className="banner_calendarButton" variant="outlined">
 					{showCalendar ? "Hide" : "Search Dates"}
 				</Button>
 				{showCalendar && <DatePicker />}
+			</div> */}
 
-			</div>
 			<div className="banner_text">
 				<h2>Dare to live the life you&apos;ve always dreamed of</h2>
 				<h6>Plan your next getaway and discover the adventure that awaits.</h6>

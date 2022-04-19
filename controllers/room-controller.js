@@ -16,6 +16,19 @@ exports.getAvailableRooms = async (req, res, next) => {
   }
 };
 
+// Gets all rooms (for admin)
+exports.getAllRooms = async (req, res, next) => {
+
+  try {
+    const roomList = await Room.find();
+
+    res.status(200).send(roomList);
+
+  } catch (error) {
+    return next(error);
+  }
+};
+
 // Create a new room listing
 exports.createRoom = async (req, res, next) => {
 
