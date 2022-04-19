@@ -6,11 +6,29 @@ const SALTROUNDS = 10;
 
 const userSchema = mongoose.Schema({
 
-  // name: {
-  //   type: String,
-  //   required: true,
-  //   minlength: [3, 'Name must be at least 3 characters long']
-  // },
+  firstName: {
+    type: String,
+    required: true,
+    minlength: [2, 'First name must be at least 2 characters long']
+  },
+
+  lastName: {
+    type: String,
+    required: true,
+    minlength: [2, 'Last name must be at least 2 characters long']
+  },
+
+  address: {
+    type: String,
+    required: true,
+    minlength: [1, 'Invalid address']
+  },
+
+  phoneNum: {
+    type: String,
+    required: true,
+    match: [/^(09|\+639)\d{9}$/, 'Invalid phone number']
+  },
 
   email: {
     type: String,

@@ -11,3 +11,18 @@ exports.getAllUsers = async (req, res, next) => {
     next(error);
   }
 };
+
+// Get the logged in user's profile
+exports.viewProfile = async (req, res, next) => {
+
+  try {
+    const user = await User.findById(req.user.id).select('-_id -isAdmin');
+    if (!user) throw new Error('User not found');
+
+    res.status(200).send(user);
+
+  } catch (error) {
+    return next(error);
+  }
+};
+
