@@ -1,5 +1,4 @@
 const Reservation = require('../models/reservation');
-const User = require('../models/user');
 
 // Gets all reservations
 exports.getAllReservations = async (req, res, next) => {
