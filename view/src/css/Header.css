@@ -9,13 +9,15 @@
 .header_logo {
   object-fit: contain;
   height: 70px;
+
 }
 
 .header_searchBar {
   flex: 1;
   max-width: fit-content;
-  padding: 10px;
-  height: 35px;
+/*  margin-left: 22vh;*/
+  padding: 6px;
+  height:45px;
   border: 1px solid lightgray;
   border-radius: 999px;
 }
@@ -29,7 +31,7 @@
 
 .header_avatar {
   width: 15vw;
-  margin-right: 30px;
+  margin-right: 70px;
 }
 
 .dropBtn {

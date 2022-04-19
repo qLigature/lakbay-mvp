@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-
 export default function Login(props) {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isActive, setIsActive] = useState(false);
@@ -11,13 +9,14 @@ export default function Login(props) {
   function authenticate(e) {
     e.preventDefault();
 
-    localStorage.setItem("email", email);
+    localStorage.setItem('email', email);
 
     setEmail('');
     setPassword('');
 
     alert(`${email} has been verified, welcome back!`);
   }
+  console.log('sadasd');
 
   useEffect(() => {
     if (email !== '' && password !== '') {
@@ -28,7 +27,7 @@ export default function Login(props) {
   }, [email, password]);
 
   return (
-    <Form onSubmit={e => authenticate(e)}>
+    <Form onSubmit={(e) => authenticate(e)}>
       <h1>Log In</h1>
       <Form.Group controlId="email">
         <Form.Label>Email Address</Form.Label>
@@ -36,7 +35,7 @@ export default function Login(props) {
           type="email"
           placeholder="Insert your registered email here"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
       </Form.Group>
@@ -47,21 +46,31 @@ export default function Login(props) {
           type="password"
           placeholder="Insert your registered password here"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
       </Form.Group>
 
-      {isActive ?
-        <Button variant="primary" type="submit" id="submitBtn" className="mt-3 mb-3">
+      {isActive ? (
+        <Button
+          variant="primary"
+          type="submit"
+          id="submitBtn"
+          className="mt-3 mb-3"
+        >
           Log In
         </Button>
-        :
-        <Button variant="danger" type="submit" id="submitBtn" className="mt-3 mb-3" disabled>
+      ) : (
+        <Button
+          variant="danger"
+          type="submit"
+          id="submitBtn"
+          className="mt-3 mb-3"
+          disabled
+        >
           Log In
         </Button>
-      }
+      )}
     </Form>
-
   );
 }
