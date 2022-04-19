@@ -12,7 +12,7 @@ const bookingSchema = mongoose.Schema({
   reservations: [{
     roomId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Listing',
+      ref: 'Room',
       required: true
     },
 
