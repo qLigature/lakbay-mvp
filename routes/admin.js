@@ -9,11 +9,10 @@ const { verifyAdmin } = require('../middleware/verify-token');
 router.use(verifyAdmin);
 
 router.get('/users', user.getAllUsers);
-// router.patch('/users/elevate', user.elevateUser);
 
 router.use('/reservations', reservationRouter);
 
-// router.get('/products', product.getAllProducts);
+router.get('/rooms', room.getAllRooms);
 router.post('/rooms', room.createRoom);
 router.patch('/:roomId', room.updateRoomDetails);
 router.patch('/:roomId/toggle', room.toggleRoomAvailability);
