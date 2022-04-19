@@ -10,25 +10,25 @@ const bookingSchema = mongoose.Schema({
   },
 
   reservations: [{
-    listingId: {
+    roomId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Listing',
       required: true
     },
 
-    // Will be copied from listing reference
+    // Will be copied from room reference
     name: {
       type: String,
       required: true
     },
 
-    // Will be copied from listing reference
-    short_address: {
+    // Will be copied from room reference
+    shortAddress: {
       type: String,
       required: true
     },
 
-    // Will be copied from listing reference (price)
+    // Will be copied from room reference (price)
     subtotal: {
       type: Number,
       required: true
@@ -45,21 +45,28 @@ const bookingSchema = mongoose.Schema({
 });
 
 
-// // Helper method for adding items to cart
-// cartSchema.methods.add = function (newItem) {
-//   const itemExists = this.items.find(item => {
-//     return newItem.productId === item.productId.toString();
-//   });
+// Helper method for adding items to cart (TODO when booking feature has been expanded)
+bookingSchema.methods.add = function (newRoom) {
 
-//   if (itemExists) {
-//     itemExists.quantity += newItem.quantity;
-//   } else {
-//     this.items.push(newItem);
-//   }
+  // const roomExists = this.reservations.find(reservation => {
+  //   return newRoom.roomId === reservation.roomId.toString();
+  // });
 
-//   this.totalAmount = this.getTotalPrice();
-//   return this.save();
-// };
+  // if (roomExists) {
+  //   roomExists.quantity += roomExists.quantity;
+  // } else {
+  //   this.items.push(roomExists);
+  // }
+
+  // this.totalPrice = this.getTotalPrice();
+
+  // Check if there is already a room in reservations, if so, return an error
+  if (this.reservations.length > 0) {
+    return new Error('Room already in booking, please remove your current booking first');
+  }
+
+  return this.save();
+};
 
 // // Helper method for removing items from cart
 // cartSchema.methods.pop = function (productId) {
