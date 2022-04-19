@@ -56,12 +56,13 @@ exports.login = async (req, res, next) => {
       process.env.ACCESS_TOKEN_SECRET
     );
 
-    res.cookie('accessToken', accessToken, {
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 // 1 day
-    });
+    // res.cookie('accessToken', accessToken, {
+    //   httpOnly: true,
+    //   maxAge: 60 * 60 * 24 // 1 day
+    // });
+
     res.status(200).send({
-      message: 'You have successfully logged in'
+      token: accessToken
     });
 
   } catch (error) {
