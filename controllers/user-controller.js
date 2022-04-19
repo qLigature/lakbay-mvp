@@ -27,6 +27,23 @@ exports.viewProfile = async (req, res, next) => {
   }
 };
 
+// Get the logged in user's admin status
+exports.getUserAdminStatus = async (req, res, next) => {
+
+  try {
+    const user = await User.findById(req.user.id).select('-_id -password');
+    if (!user) throw new Error('User not found');
+
+    res.status(200).send({
+      id: req.user.id,
+      isAdmin: user.isAdmin
+    });
+
+  } catch (error) {
+    return next(error);
+  }
+};
+
 // Get all reservations of the logged in user
 exports.getUserReservations = async (req, res, next) => {
 
