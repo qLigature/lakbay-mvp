@@ -6,9 +6,13 @@ require('dotenv').config();
 // Registers a non-admin user
 exports.registerUser = async (req, res, next) => {
 
-  const { email, password } = req.body;
+  const { firstName, lastName, address, phoneNum, email, password } = req.body;
 
   const user = new User({
+    firstName,
+    lastName,
+    address,
+    phoneNum,
     email,
     password
   });
