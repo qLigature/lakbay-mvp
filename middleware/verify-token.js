@@ -13,7 +13,7 @@ exports.verifyToken = jwt(
     '/login',
     '/register',
     '/rooms',
-    '/rooms/(.*)',
+    /^\/rooms\/.*/
   ]
 });
 
