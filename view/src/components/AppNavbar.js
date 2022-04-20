@@ -18,7 +18,7 @@ function AppNavBar() {
         <Nav className="ms-auto me-5">
 
           <Nav.Link as={Link} to="/">Home</Nav.Link>
-          <Nav.Link as={Link} to="/products">Products</Nav.Link>
+          <Nav.Link as={Link} to="/rooms">Rooms</Nav.Link>
 
           {/* Conditionally render login or logout depending on user global variable */}
           {(user.id !== null) ?

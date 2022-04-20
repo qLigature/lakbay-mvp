@@ -6,6 +6,7 @@ import AppNavbar from './components/AppNavbar';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import Register from './pages/Register';
 import Rooms from './pages/Rooms';
 // import RoomView from './pages/RoomView';
 // import SearchPage from './pages/SearchPage';
@@ -55,9 +56,10 @@ function App() {
 
             <Route exact path="/rooms" element={<Rooms />} />
             {/* <Route exact path="/rooms/:roomId" element={<RoomView />} /> */}
+            <Route exact path="/register" element={<Register />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/logout" element={<Logout />} />
-            {/* <Route exact path="/register" element={<Register />} /> */}
+            {/*  */}
             {/*         
               
               <Route exact path= "/logout" element={<Logout/>}/>
