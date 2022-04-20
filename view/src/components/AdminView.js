@@ -4,178 +4,144 @@ import Swal from 'sweetalert2';
 
 function AdminView(props) {
 
-  // Destructure our courses data from the props being passed by the parent component (courses page)
-  // Includes the "fetchData" function that retrieves the courses from our database
   const { roomData, fetchData } = props;
 
-  // States for form inputs
-  const [courseId, setCourseId] = useState("");
-  const [courses, setCourses] = useState([]);
+  const [roomId, setroomId] = useState("");
+  const [rooms, setRooms] = useState([]);
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [shortAddress, setAddress] = useState("");
   const [price, setPrice] = useState(0);
 
-  // States to open/close modals
   const [showEdit, setShowEdit] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
 
-  // Functions to toggle the opening and closing of the "Add Course" modal
   const openAdd = () => setShowAdd(true);
   const closeAdd = () => setShowAdd(false);
 
-  /* 
-  Function to open the "Edit Course" modal:
-    - Fetches the selected course data using the course ID
-    - Populates the values of the input fields in the modal form
-    - Opens the "Edit Course" modal
-  */
-  const openEdit = (courseId) => {
-
-    // Fetches the selected course data using the course ID
-    fetch(`http://localhost:4000/courses/${courseId}`)
+  const openEdit = (roomId) => {
+    fetch(`http://localhost:9000/admin/rooms/${roomId}`, {
+      method: 'GET',
+      headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` }
+    })
       .then(res => res.json())
       .then(data => {
 
-        // console.log(data);
-
-        // Changes the states for binded to the input fields
-        // Populates the values of the input files in the modal form
-        setCourseId(data._id);
+        setroomId(data._id);
         setName(data.name);
-        setDescription(data.description);
+        setAddress(data.shortAddress);
         setPrice(data.price);
       });
 
-    // Opens the "Edit Course" modal
     setShowEdit(true);
   };
 
-  /* 
-  Function to close our "Edit Course" modal:
-    - Reset from states back to their initial values
-    - Empties the input fields in the form whenever the modal is opened for adding a course
-  */
   const closeEdit = () => {
-
     setShowEdit(false);
     setName("");
-    setDescription("");
+    setAddress("");
     setPrice(0);
-
   };
 
-  const addCourse = (e) => {
+  const addRoom = (e) => {
 
-    // Prevent the form from redirecting to a different page on submit 
-    // Helps retain the data if adding a course is unsuccessful
     e.preventDefault();
-
-    fetch(`http://localhost:4000/courses`, {
+    fetch(`http://localhost:9000/admin/rooms`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`
       },
       body: JSON.stringify({
         name: name,
-        description: description,
+        shortAddress: shortAddress,
         price: price
       })
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
       .then(data => {
 
-        // If the new course is successfully added
-        if (data === true) {
+        fetchData();
 
-          // Invoke the "fetchData" function passed from our parent component (courses page)
-          // Rerenders the page because of the "useEffect"
-          fetchData();
+        Swal.fire({
+          title: "Success",
+          icon: "success",
+          text: "Room successfully added."
+        });
 
-          // Show a success message via sweet alert
-          Swal.fire({
-            title: "Success",
-            icon: "success",
-            text: "Course successfully added."
-          });
+        setName("");
+        setAddress("");
+        setPrice(0);
 
-          // Reset all states to their initial values
-          // Provides better user experience by clearing all the input fieles when the user adds another course
-          setName("");
-          setDescription("");
-          setPrice(0);
+        closeAdd();
 
-          // Close the modal
-          closeAdd();
-
-        } else {
-
-          fetchData();
-
-          Swal.fire({
-            title: "Something went wrong",
-            icon: "error",
-            text: "Please try again."
-          });
-        }
+      })
+      .catch(err => {
+        console.log(err);
+        Swal.fire({
+          title: "Error",
+          icon: "error",
+          text: "Something went wrong. Please try again."
+        });
       });
   };
 
-  const editCourse = (e, courseId) => {
+  const editRoom = (e, roomId) => {
 
     e.preventDefault();
-
-    fetch(`http://localhost:4000/courses/${courseId}`, {
+    fetch(`http://localhost:9000/admin/rooms/${roomId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`
       },
       body: JSON.stringify({
         name: name,
-        description: description,
+        shortAddress: shortAddress,
         price: price
       })
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
       .then(data => {
         console.log(data);
+        fetchData();
 
-        if (data === true) {
+        Swal.fire({
+          title: "Success",
+          icon: "success",
+          text: "Room details successfully updated."
+        });
 
-          fetchData();
-
-          Swal.fire({
-            title: "Success",
-            icon: "success",
-            text: "Course successfully updated."
-          });
-
-          closeEdit();
-
-        } else {
-
-          fetchData();
-
-          Swal.fire({
-            title: "Something went wrong",
-            icon: "error",
-            text: "Please try again."
-          });
-
-        }
-
+        closeEdit();
+      })
+      .catch(error => {
+        console.log(error);
+        fetchData();
+        Swal.fire({
+          title: "Something went wrong",
+          icon: "error",
+          text: "Please try again."
+        });
       });
   };
 
   // Map through the courses received from the parent component (course page)
   // Re-renders the table whenever the "coursesData" is updated by adding, editing and deleting a course
 
-  const archiveToggle = (courseId, isAvailable) => {
+  const archiveToggle = (roomId, isAvailable) => {
 
     console.log(!isAvailable);
 
-    fetch(`http://localhost:4000/courses/${courseId}/archive`, {
+    fetch(`http://localhost:9000/admin/rooms/${roomId}/archive`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
@@ -213,11 +179,11 @@ function AdminView(props) {
       });
   };
 
-  const unarchiveToggle = (courseId, isAvailable) => {
+  const unarchiveToggle = (roomId, isAvailable) => {
 
     console.log(!isAvailable);
 
-    fetch(`http://localhost:4000/courses/${courseId}/unarchive`, {
+    fetch(`http://localhost:9000/admin/rooms/${roomId}/unarchive`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
@@ -314,7 +280,7 @@ function AdminView(props) {
 
     // Set the "courses" state with the table rows returned by the map function
     // Renders table row elements inside the table via this "AdminView" return statement below
-    setCourses(roomsArr);
+    setRooms(roomsArr);
 
   }, [roomData, fetchData]);
 
@@ -339,13 +305,13 @@ function AdminView(props) {
           </tr>
         </thead>
         <tbody>
-          {courses}
+          {rooms}
         </tbody>
       </Table>
 
       {/*ADD MODAL*/}
       <Modal show={showAdd} onHide={closeAdd}>
-        <Form onSubmit={e => addCourse(e)}>
+        <Form onSubmit={e => addRoom(e)}>
           <Modal.Header closeButton>
             <Modal.Title>Add Course</Modal.Title>
           </Modal.Header>
@@ -354,9 +320,9 @@ function AdminView(props) {
               <Form.Label>Name</Form.Label>
               <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} required />
             </Form.Group>
-            <Form.Group controlId="courseDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control type="text" value={description} onChange={e => setDescription(e.target.value)} required />
+            <Form.Group controlId="courseshortAddress">
+              <Form.Label>shortAddress</Form.Label>
+              <Form.Control type="text" value={shortAddress} onChange={e => setAddress(e.target.value)} required />
             </Form.Group>
             <Form.Group controlId="coursePrice">
               <Form.Label>Price</Form.Label>
@@ -372,7 +338,7 @@ function AdminView(props) {
 
       {/*EDIT MODAL*/}
       <Modal show={showEdit} onHide={closeEdit}>
-        <Form onSubmit={e => editCourse(e, courseId)}>
+        <Form onSubmit={e => editRoom(e, roomId)}>
           <Modal.Header closeButton>
             <Modal.Title>Edit Course</Modal.Title>
           </Modal.Header>
@@ -381,9 +347,9 @@ function AdminView(props) {
               <Form.Label>Name</Form.Label>
               <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} required />
             </Form.Group>
-            <Form.Group controlId="courseDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control type="text" value={description} onChange={e => setDescription(e.target.value)} required />
+            <Form.Group controlId="courseshortAddress">
+              <Form.Label>shortAddress</Form.Label>
+              <Form.Control type="text" value={shortAddress} onChange={e => setAddress(e.target.value)} required />
             </Form.Group>
             <Form.Group controlId="coursePrice">
               <Form.Label>Price</Form.Label>
