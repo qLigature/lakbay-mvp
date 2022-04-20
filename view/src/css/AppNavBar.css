@@ -2,13 +2,18 @@
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-.navbar_Font {
+.black {
+  background-color: black !important;
+}
+
+.navbar_font {
   background-color: black;
-  font-size: 30px;
+  font-size: 22px;
   padding: 30px;
   color: white !important;
 }
 
 .navlink-font {
   color: white !important;
+  padding-left: 100px;
 }
