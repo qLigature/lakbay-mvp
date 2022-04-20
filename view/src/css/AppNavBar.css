@@ -1,0 +1,14 @@
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.navbar_Font {
+  background-color: black;
+  font-size: 30px;
+  padding: 30px;
+  color: white !important;
+}
+
+.navlink-font {
+  color: white !important;
+}
