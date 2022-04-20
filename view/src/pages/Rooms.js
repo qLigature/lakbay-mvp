@@ -33,7 +33,8 @@ function Rooms() {
   return (
     <Container className="p-4">
       {(user.isAdmin === true) ?
-        {/* <AdminView /> */ }
+        <UserView roomData={rooms} />
+
         :
         <UserView roomData={rooms} />
       }

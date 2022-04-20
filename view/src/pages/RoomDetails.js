@@ -56,6 +56,8 @@ function RoomDetails() {
   //     });
   // };
 
+
+
   useEffect(() => {
     console.log(roomId);
 
@@ -70,9 +72,55 @@ function RoomDetails() {
       });
   }, [roomId]);
 
+  // function that calls the cart endpoint to add a course to the cart
+  const addToCart = async () => {
+
+    try {
+      const response = await fetch('http://localhost:9000/bookings/add', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`
+        },
+        body: JSON.stringify({
+          roomId: roomId
+        })
+      });
+      if (!response.ok) return console.log('Invalid token');
+
+      Swal.fire({
+        title: "Added to cart!",
+        icon: "success",
+        text: "You have successfully added this room to your cart"
+      });
+
+      history("/cart");
+    } catch (error) {
+      console.trace(error);
+
+      Swal.fire({
+        title: "Something went wrong",
+        icon: "error",
+        text: "Please contact admin"
+      });
+
+    }
+    // v5: history.push("/endpoint")
+  };
+
+  let checkoutBtn;
+
+  if (user.id !== null && user.isAdmin === true) {
+    checkoutBtn = <Link className="btn btn-danger" to="/login">Log in as User to Book</Link>;
+  } else if (user.id !== null) {
+    checkoutBtn = <Button variant="primary" onClick={addToCart}>Add to Cart</Button>;
+  } else {
+    checkoutBtn = <Link className="btn btn-danger" to="/login">Log In to Book</Link>;
+  }
+
   return (
     <Container className="mt-5">
-      <h1 className="text-center">Product Details</h1>
+      <h1 className="text-center">Room Details</h1>
       <Row className="py-5 mb-5">
         <Col lg={{ span: 7, offset: 3 }}>
           <Card>
@@ -85,12 +133,7 @@ function RoomDetails() {
               <Card.Subtitle>Price</Card.Subtitle>
               <Card.Text>PHP {price}</Card.Text>
 
-              {user.id !== null ?
-                <Button variant="primary">Add to Cart</Button>
-                :
-
-                <Link className="btn btn-danger" to="/login">Log In to Book</Link>
-              }
+              {checkoutBtn}
 
             </Card.Body>
           </Card>
