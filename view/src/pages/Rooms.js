@@ -9,10 +9,6 @@ function Rooms() {
   const { user } = useContext(UserContext);
   const [rooms, setRooms] = useState([]);
 
-  // let CourseCards = courses.map( (course) => {
-  // 	return <Course key={course.id} course={course}/>
-  // })
-
   const fetchRooms = async () => {
     try {
       const response = await fetch('http://localhost:9000/rooms');

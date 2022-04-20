@@ -4,59 +4,16 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 
-
 function RoomDetails() {
 
   const { user } = useContext(UserContext);
-
-  // allows us to gain access to methods that will allow us to redirect the user to a different page after enrolling a course
   const history = useNavigate();
 
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [price, setPrice] = useState(0);
 
-  // useParams hook allows us to retrieve the courseId passed via the URL
   const { roomId } = useParams();
-
-  // const enroll = (courseId) => {
-  //   fetch('http://localhost:4000/users/enroll', {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`
-  //     },
-  //     body: JSON.stringify({
-  //       courseId: courseId
-  //     })
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       console.log(data);
-
-  //       if (data === true) {
-
-  //         Swal.fire({
-  //           title: "Enrolled Successfully!",
-  //           icon: "success",
-  //           text: "You have successfully enrolled in this course"
-  //         });
-
-  //         history("/courses");
-  //         // v5: history.push("/endpoint")
-
-  //       } else {
-
-  //         Swal.fire({
-  //           title: "Something went wrong",
-  //           icon: "error",
-  //           text: "Please contact admin"
-  //         });
-  //       }
-  //     });
-  // };
-
-
 
   useEffect(() => {
     console.log(roomId);
@@ -72,7 +29,6 @@ function RoomDetails() {
       });
   }, [roomId]);
 
-  // function that calls the cart endpoint to add a course to the cart
   const addToCart = async () => {
 
     try {
@@ -86,26 +42,26 @@ function RoomDetails() {
           roomId: roomId
         })
       });
-      if (!response.ok) return console.log('Invalid token');
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
 
       Swal.fire({
-        title: "Added to cart!",
+        title: "Room booked!",
         icon: "success",
-        text: "You have successfully added this room to your cart"
+        text: "You have successfully added this room to your booking!"
       });
 
-      history("/cart");
+      history("/bookings");
     } catch (error) {
-      console.trace(error);
 
       Swal.fire({
-        title: "Something went wrong",
+        title: "Booking is Full",
         icon: "error",
-        text: "Please contact admin"
+        text: "Please clear your booking first"
       });
 
     }
-    // v5: history.push("/endpoint")
   };
 
   let checkoutBtn;
@@ -113,7 +69,7 @@ function RoomDetails() {
   if (user.id !== null && user.isAdmin === true) {
     checkoutBtn = <Link className="btn btn-danger" to="/login">Log in as User to Book</Link>;
   } else if (user.id !== null) {
-    checkoutBtn = <Button variant="primary" onClick={addToCart}>Add to Cart</Button>;
+    checkoutBtn = <Button variant="primary" onClick={addToCart}>Book this Room</Button>;
   } else {
     checkoutBtn = <Link className="btn btn-danger" to="/login">Log In to Book</Link>;
   }
