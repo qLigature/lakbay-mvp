@@ -102,7 +102,7 @@ function Register() {
           <Form.Label></Form.Label>
           <Form.Control
             type="text"
-            placeholder="First Name"
+            placeholder="First Name (e.g. Juan)"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -112,7 +112,7 @@ function Register() {
         <Form.Group className="forms" controlId="lastName">
           <Form.Control
             type="text"
-            placeholder="Last Name"
+            placeholder="Last Name (e.g. Dela Cruz)"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -122,7 +122,7 @@ function Register() {
         <Form.Group className="forms" controlId="address">
           <Form.Control
             type="text"
-            placeholder="Address"
+            placeholder="Address (e.g. Quezon City, Metro Manila)"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
@@ -132,7 +132,7 @@ function Register() {
         <Form.Group className="forms" controlId="mobileNo">
           <Form.Control
             type="text"
-            placeholder="Mobile Number"
+            placeholder="Mobile Number (e.g. 09279781740)"
             value={mobileNo}
             onChange={(e) => setMobileNo(e.target.value)}
             required
@@ -142,7 +142,7 @@ function Register() {
         <Form.Group className="forms" controlId="userEmail">
           <Form.Control
             type="email"
-            placeholder="Email Address"
+            placeholder="Email Address (e.g. juandelacruz@gmail.com)"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -152,7 +152,7 @@ function Register() {
         <Form.Group className="forms" controlId="password1">
           <Form.Control
             type="password"
-            placeholder="Password"
+            placeholder="Password (must be at least 8 characters long)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
