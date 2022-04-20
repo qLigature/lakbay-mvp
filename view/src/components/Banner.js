@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Button } from 'react-bootstrap';
-import DatePicker from './DatePicker';
 import '../pages/Home';
 import '../css/Banner.css';
 

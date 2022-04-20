@@ -1,28 +1,28 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import '../css/RoomCard.css';
 
-export default function RoomCard({ roomProps }) {
-  const { src, title, description, price, id } = roomProps;
+function RoomCard({ roomProps }) {
+
+  console.log(roomProps);
+  // expected result is coursesData[0]
+  console.log(typeof roomProps);
+  // result: object
+
+  const { name, shortAddress, price, _id } = roomProps;
 
   return (
-    <Row className="my-3">
-      <Col xs={12} md={6}>
-        <div className="roomCard d-flex flex-column">
-          <img src={src} alt="" />
-          <div className="roomCard_Text p-5">
-            <h2>{title}</h2>
-            <h5>{description}</h5>
-            <h3>PHP {price}</h3>
-            <Button variant="danger" as={Link} to={`/rooms/${id}`}>
-              See Details
-            </Button>
-          </div>
-        </div>
-      </Col>
-    </Row>
+    <Card>
+      <Card.Body className="align-items-stretch">
+        <Card.Title className="h1 pb-3">{name}</Card.Title>
+        <Card.Subtitle>Address:</Card.Subtitle>
+        <Card.Text>{shortAddress}</Card.Text>
+        <Card.Subtitle>Price:</Card.Subtitle>
+        <Card.Text>PHP {price}</Card.Text>
+        <Button variant="primary" as={Link} to={`/rooms/${_id}`}>See Details</Button>
+      </Card.Body>
+    </Card>
   );
 }
+
+export default RoomCard;

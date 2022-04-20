@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Form, Button, Card } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import '../css/Login.css';
 import UserContext from '../UserContext';
 
 function Login(props) {
-
   const { user, setUser } = useContext(UserContext);
 
   const [email, setEmail] = useState('');
@@ -28,14 +28,14 @@ function Login(props) {
         password: password
       })
     })
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
           throw new Error('Invalid email or password');
         }
       })
-      .then(data => {
+      .then((data) => {
         if (data.error) {
           console.log(data.error);
           return;
@@ -58,7 +58,7 @@ function Login(props) {
         // Redirect to home page
         navigate('/');
       })
-      .catch(error => {
+      .catch((error) => {
         Swal.fire({
           title: 'Authentication Failed',
           icon: 'error',
@@ -69,14 +69,13 @@ function Login(props) {
 
   const retrieveUserDetails = (token) => {
     fetch('http://localhost:9000/users/verify', {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-      .then(res => res.json())
-      .then(data => {
-
+      .then((res) => res.json())
+      .then((data) => {
         setUser({
           id: data.id,
           isAdmin: data.isAdmin
@@ -94,51 +93,67 @@ function Login(props) {
   }, [email, password]);
 
   return (
-    <Form onSubmit={(e) => authenticate(e)}>
-      <h1>Log In</h1>
-      <Form.Group controlId="email">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Email Address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </Form.Group>
+    <div className="loginCard col-12 mx-auto">
+      <Form onSubmit={(e) => authenticate(e)}>
+        <h1 className="m-3">Welcome</h1>
+        <h4 className="m-3">Log in to dashboard</h4>
+        <Form.Group controlId="email">
+          <Form.Control
+            className="my-4 py-2"
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-      <Form.Group controlId="password">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </Form.Group>
-
-      {isActive ? (
-        <Button
-          variant="primary"
-          type="submit"
-          id="submitBtn"
-          className="mt-3 mb-3"
-        >
-          Log In
-        </Button>
-      ) : (
-        <Button
-          variant="danger"
-          type="submit"
-          id="submitBtn"
-          className="mt-3 mb-3"
-          disabled
-        >
-          Log In
-        </Button>
-      )}
-    </Form>
+        <Form.Group controlId="password">
+          <Form.Control
+            className="my-4 py-2"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <div className="d-flex justify-content-center">
+          {isActive ? (
+            <Button
+              className="mt-3 mb-2 px-5 my-3 rounded-pill btn-lg"
+              variant="primary"
+              type="submit"
+              id="submitBtn"
+            >
+              Log In
+            </Button>
+          ) : (
+            <Button
+              className="mt-3 mb-2 px-5 rounded-pill btn-lg"
+              variant="danger"
+              type="submit"
+              id="submitBtn"
+              disabled
+            >
+              Log In
+            </Button>
+          )}
+        </div>
+        <hr className="solid"></hr>
+        <div className="d-flex justify-content-center mt-4 mb-3">
+          <Button
+            variant="success"
+            type="submit"
+            id="submitBtn"
+            as={Link}
+            to="/register"
+          >
+            Create a New Account
+          </Button>
+        </div>
+      </Form>
+    </div>
   );
 }
 
