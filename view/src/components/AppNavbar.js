@@ -14,19 +14,29 @@ function AppNavBar() {
           className="mx-4 my-2"
           src={logo}
           alt="Lakbay Logo"
-          height="70px"
-          width="70px"
+          height="50px"
+          width="50px"
         />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto me-5">
+
           <Nav.Link as={Link} to="/">
             Home
           </Nav.Link>
+
           <Nav.Link as={Link} to="/rooms">
             Rooms
           </Nav.Link>
+
+          {
+            user.id !== null && user.isAdmin === false ? (
+              <Nav.Link as={Link} to="/bookings">
+                Booking
+              </Nav.Link>
+            ) : null
+          }
 
           {/* Conditionally render login or logout depending on user global variable */}
           {user.id !== null ? (

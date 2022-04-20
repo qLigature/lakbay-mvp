@@ -10,6 +10,8 @@ function Home() {
 		<div className="home">
 			<Banner />
 
+			<h1 className="text-center pt-5 mt-5">Featured Rooms</h1>
+
 			<div className="home_Cards d-flex">
 				<Card
 					src="https://images.pexels.com/photos/7601377/pexels-photo-7601377.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"

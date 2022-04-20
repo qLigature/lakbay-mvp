@@ -12,7 +12,7 @@ function Footer() {
 	return (
 		<div className='footer d-flex align-items-center justify-content-between px-5'>
 			<div className="d-flex align-items-center">
-				<p>© 2022 The GetAway Inc.{/* · Privacy · Terms*/}</p>
+				<p>© 2022 Lakbay Inc.{/* · Privacy · Terms*/}</p>
 
 				{/*<Button as={Link} to="/Home">Privacy</Button>
 		    	<p>·</p>

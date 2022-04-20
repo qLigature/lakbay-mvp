@@ -16,6 +16,6 @@ router.get('/rooms', room.getAllRooms);
 router.get('/rooms/:roomId', room.getRoomById);
 router.post('/rooms', room.createRoom);
 router.put('/rooms/:roomId', room.updateRoomDetails);
-router.patch('/:roomId/toggle', room.toggleRoomAvailability);
+router.patch('/rooms/:roomId/toggle', room.toggleRoomAvailability);
 
 module.exports = router;
