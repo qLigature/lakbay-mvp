@@ -6,7 +6,7 @@ function Card(props) {
   const { src, title, description, price } = props;
 
   return (
-    <div className="card">
+    <div className="card d-md-flex">
       <img src={src} alt="" />
       <div className="card_text">
         <h2>{title}</h2>
