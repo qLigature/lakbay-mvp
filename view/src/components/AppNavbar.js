@@ -33,9 +33,15 @@ function AppNavBar() {
 
           {
             user.id !== null && user.isAdmin === false ? (
-              <Nav.Link as={Link} to="/bookings" className="navlink-font">
-                Booking
-              </Nav.Link>
+              <>
+                <Nav.Link as={Link} to="/bookings" className="navlink-font">
+                  Booking
+                </Nav.Link>
+
+                <Nav.Link as={Link} to="/profile" className="navlink-font">
+                  Profile
+                </Nav.Link>
+              </>
             ) : null
           }
 

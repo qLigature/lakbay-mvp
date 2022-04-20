@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Table, Button, Modal, Form } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
@@ -44,7 +44,7 @@ function Booking() {
         icon: "success",
         text: "You have successfully cleared your booking!"
       });
-      navigate('/');
+      navigate('/profile');
 
     } catch (error) {
       Swal.fire({
@@ -72,7 +72,7 @@ function Booking() {
         'Your booking has been confirmed.',
         'success'
       );
-      navigate('/');
+      navigate('/profile');
 
     } catch (error) {
       console.log(error);
@@ -95,9 +95,7 @@ function Booking() {
           <td>{reservation.shortAddress}</td>
           <td>PHP {reservation.subtotal}</td>
         </tr>
-
       );
-
     });
     setReservations(bookingsArr);
 

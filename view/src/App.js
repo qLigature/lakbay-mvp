@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Rooms from './pages/Rooms';
 import RoomDetails from './pages/RoomDetails';
 import Booking from './pages/Bookings';
+import Profile from './pages/Profile';
 import { UserProvider } from './UserContext';
 
 function App() {
@@ -19,6 +20,24 @@ function App() {
     id: null,
     isAdmin: null
   });
+
+  const [profileData, setProfileData] = useState({});
+  const fetchProfile = async () => {
+    try {
+      const response = await fetch('http://localhost:9000/users/profile', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      console.log('response: ', data);
+      setProfileData(data);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Fetch JWT from sessionStorage and verify using endpoint
   useEffect(() => {
@@ -43,6 +62,7 @@ function App() {
       }
     };
     verifyUser();
+    fetchProfile();
 
   }, []);
 
@@ -58,6 +78,7 @@ function App() {
             <Route exact path="/rooms/:roomId" element={<RoomDetails />} />
             <Route exact path="/bookings" element={<Booking />} />
             <Route exact path="/register" element={<Register />} />
+            <Route exact path="/profile" element={<Profile profileData={profileData} fetchProfile={fetchProfile} />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/logout" element={<Logout />} />
             {/*  */}
