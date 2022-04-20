@@ -9,7 +9,7 @@ import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Rooms from './pages/Rooms';
 import RoomDetails from './pages/RoomDetails';
-// import SearchPage from './pages/SearchPage';
+import Booking from './pages/Bookings';
 import { UserProvider } from './UserContext';
 
 function App() {
@@ -56,12 +56,12 @@ function App() {
 
             <Route exact path="/rooms" element={<Rooms />} />
             <Route exact path="/rooms/:roomId" element={<RoomDetails />} />
+            <Route exact path="/bookings" element={<Booking />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/logout" element={<Logout />} />
             {/*  */}
             {/*         
-              
               <Route exact path= "/logout" element={<Logout/>}/>
               <Route exact path= "*" element={<Error/>}/>*/}
           </Routes>

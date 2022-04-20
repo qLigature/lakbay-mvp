@@ -21,12 +21,22 @@ function AppNavBar() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto me-5">
+
           <Nav.Link as={Link} to="/">
             Home
           </Nav.Link>
+
           <Nav.Link as={Link} to="/rooms">
             Rooms
           </Nav.Link>
+
+          {
+            user.id !== null && user.isAdmin === false ? (
+              <Nav.Link as={Link} to="/bookings">
+                Booking
+              </Nav.Link>
+            ) : null
+          }
 
           {/* Conditionally render login or logout depending on user global variable */}
           {user.id !== null ? (
