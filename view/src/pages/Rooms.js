@@ -1,17 +1,44 @@
-import React from 'react';
-import roomsData from '../data/roomsData';
-import RoomCard from '../components/RoomCard';
+import React, { useState, useEffect, useContext } from 'react';
+import { Container } from 'react-bootstrap';
+// import AdminView from './../components/AdminView.js';
+import UserView from './../components/UserView.js';
+import UserContext from './../UserContext';
 
-export default function Rooms() {
-  const rooms = roomsData.map((room) => {
-    console.log(room);
-    return <RoomCard key={room.id} roomProps={room} />;
-  });
+function Rooms() {
+
+  const { user } = useContext(UserContext);
+  const [rooms, setRooms] = useState([]);
+
+  // let CourseCards = courses.map( (course) => {
+  // 	return <Course key={course.id} course={course}/>
+  // })
+
+  // Fetch data from database
+  useEffect(() => {
+
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch('http://localhost:9000/rooms');
+        const data = await response.json();
+        console.log(data);
+        setRooms(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchRooms();
+
+  }, []);
 
   return (
-    <>
-      <h1>Available Rooms</h1>
-      {rooms}
-    </>
+    <Container className="p-4">
+      {(user.isAdmin === true) ?
+        {/* <AdminView /> */ }
+        :
+        <UserView roomData={rooms} />
+      }
+    </Container>
   );
 }
+
+export default Rooms;
