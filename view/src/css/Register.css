@@ -3,7 +3,7 @@
   padding: 40px 70px 625px 70px;
   margin: 75px 0px 90px 0px;
   height: 820px;
-  background-color: white;
+  background-image: linear-gradient(to top, #fffaf6, pink);
   border: 1px solid #c6c6c6;
   border-radius: 10px;
   box-shadow: 0px 10px 20px -4px rgba(0, 0, 0, 0.6);
