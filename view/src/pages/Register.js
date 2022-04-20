@@ -96,7 +96,7 @@ function Register() {
   ) : (
     <div className="regCard col-md-6 mx-auto">
       <Form onSubmit={(e) => registerUser(e)}>
-        <h1 className="px-3">Create an account</h1>
+        <h2 className="px-3 mt-3">Create an account</h2>
 
         <Form.Group className="forms" controlId="firstName">
           <Form.Label></Form.Label>
@@ -169,36 +169,29 @@ function Register() {
           />
         </Form.Group>
 
-        <p className=" px-3 my-3">
-          By creating an account, I agree to the Lakbay Terms and Conditions,
-          and Privacy Statement.
-        </p>
-        {/*conditionally rendering submit button based on isActive state*/}
-
         {isActive ? (
           <Button
-            className="m-3 mt-4 mb-5 px-5 rounded-pill btn-lg"
-            variant="primary "
+            className="m-3 mt-4 mb-4 px-5 rounded-pill btn-lg"
+            variant="danger"
             type="submit"
             id="submitBtn"
           >
-            Submit
+            Sign Up
           </Button>
         ) : (
           <Button
-            className="m-3 mt-4 mb-5 px-5 rounded-pill btn-lg"
-            variant="danger "
+            className="m-3 mt-4 mb-4 px-5 rounded-pill btn-lg"
+            variant="secondary"
             type="submit"
             id="submitBtn"
             disabled
           >
-            Submit
+            Sign Up
           </Button>
         )}
       </Form>
-      <p className="px-5 mx-4">
-        Already have an account?
-        <Link className="m-2" to="/login" style={{ textDecoration: 'none' }}>
+      <p className="px-5 mx-4 text-center">Already have an account?
+        <Link className="mx-2" to="/login" style={{ textDecoration: 'underline' }}>
           Sign in
         </Link>
       </p>

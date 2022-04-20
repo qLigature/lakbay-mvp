@@ -95,8 +95,7 @@ function Login(props) {
   return (
     <div className="loginCard col-12 mx-auto">
       <Form onSubmit={(e) => authenticate(e)}>
-        <h1 className="m-3">Welcome</h1>
-        <h4 className="m-3">Log in to dashboard</h4>
+        <h2 className="mt-2 py-2">Log In</h2>
         <Form.Group controlId="email">
           <Form.Control
             className="my-4 py-2"
@@ -110,7 +109,7 @@ function Login(props) {
 
         <Form.Group controlId="password">
           <Form.Control
-            className="my-4 py-2"
+            className="mt-4 mb-2 py-2"
             type="password"
             placeholder="Password"
             value={password}
@@ -121,8 +120,8 @@ function Login(props) {
         <div className="d-flex justify-content-center">
           {isActive ? (
             <Button
-              className="mt-3 mb-2 px-5 my-3 rounded-pill btn-lg"
-              variant="primary"
+              className="mb-2 px-5 my-3 rounded-pill btn-lg"
+              variant="danger"
               type="submit"
               id="submitBtn"
             >
@@ -131,7 +130,7 @@ function Login(props) {
           ) : (
             <Button
               className="mt-3 mb-2 px-5 rounded-pill btn-lg"
-              variant="danger"
+              variant="secondary"
               type="submit"
               id="submitBtn"
               disabled
@@ -141,9 +140,9 @@ function Login(props) {
           )}
         </div>
         <hr className="solid"></hr>
-        <div className="d-flex justify-content-center mt-4 mb-3">
+        <div className="d-flex justify-content-center mt-4">
           <Button
-            variant="success"
+            variant="primary"
             type="submit"
             id="submitBtn"
             as={Link}

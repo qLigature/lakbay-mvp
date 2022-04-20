@@ -14,8 +14,8 @@ function AppNavBar() {
           className="mx-4 my-2"
           src={logo}
           alt="Lakbay Logo"
-          height="70px"
-          width="70px"
+          height="50px"
+          width="50px"
         />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

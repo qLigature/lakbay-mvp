@@ -1,8 +1,8 @@
 .regCard {
   max-width: 550px;
-  padding: 40px 70px 625px 70px;
-  margin: 75px 0px 90px 0px;
-  height: 820px;
+  padding: 25px 60px 200px 60px;
+  margin: 20px 0px 50px 0px;
+  height: 680px;
   background-color: white;
   border: 1px solid #c6c6c6;
   border-radius: 10px;
@@ -12,5 +12,5 @@
 }
 
 .forms {
-  padding: 15px;
+  padding: 10px;
 }
