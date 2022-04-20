@@ -29,6 +29,25 @@ exports.getAllRooms = async (req, res, next) => {
   }
 };
 
+// Get a room by ID
+exports.getRoomById = async (req, res, next) => {
+
+  try {
+    const room = await Room.findById(req.params.roomId);
+
+    if (!room) {
+      return res.status(404).send({
+        message: 'Room not found'
+      });
+    }
+
+    res.status(200).send(room);
+
+  } catch (error) {
+    return next(error);
+  }
+};
+
 // Create a new room listing
 exports.createRoom = async (req, res, next) => {
 
@@ -79,9 +98,12 @@ exports.updateRoomDetails = async (req, res, next) => {
       });
     }
 
-    const updatedRoom = Object.assign(room, req.body);
+    // Update room info
+    room.name = req.body.name;
+    room.shortAddress = req.body.shortAddress;
+    room.price = req.body.price;
 
-    await updatedRoom.save();
+    await room.save();
     res.status(200).send({
       message: 'Room updated successfully'
     });
