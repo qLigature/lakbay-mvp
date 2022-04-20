@@ -24,18 +24,35 @@ function Rooms() {
     }
   };
 
+  const fetchAdminRooms = async () => {
+    try {
+      const response = await fetch('http://localhost:9000/admin/rooms', {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      console.log(data);
+      setRooms(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // Fetch data from database
   useEffect(() => {
-
-
-    fetchRooms();
+    if (user.id !== null && user.isAdmin) {
+      fetchAdminRooms();
+    } else {
+      fetchRooms();
+    }
 
   }, []);
 
   return (
     <Container className="p-4">
       {(user.isAdmin === true) ?
-        <AdminView roomData={rooms} fetchData={fetchRooms} />
+        <AdminView roomData={rooms} fetchData={fetchAdminRooms} />
 
         :
         <UserView roomData={rooms} />

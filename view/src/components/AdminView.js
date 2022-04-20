@@ -134,6 +134,8 @@ function AdminView(props) {
       });
   };
 
+
+
   // Map through the courses received from the parent component (course page)
   // Re-renders the table whenever the "coursesData" is updated by adding, editing and deleting a course
 
@@ -141,20 +143,17 @@ function AdminView(props) {
 
     console.log(!isAvailable);
 
-    fetch(`http://localhost:9000/admin/rooms/${roomId}/archive`, {
-      method: 'PUT',
+    fetch(`http://localhost:9000/admin/rooms/${roomId}/toggle`, {
+      method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({
-        isAvailable: !isAvailable
-      })
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`
+      }
     })
       .then(res => res.json())
       .then(data => {
 
-        if (data === true) {
+        if (data) {
           console.log(data);
 
           fetchData();
@@ -162,7 +161,7 @@ function AdminView(props) {
           Swal.fire({
             title: "Success",
             icon: "success",
-            text: "Course successfully archived."
+            text: "Room is now unavailable"
           });
 
         } else {
@@ -183,20 +182,17 @@ function AdminView(props) {
 
     console.log(!isAvailable);
 
-    fetch(`http://localhost:9000/admin/rooms/${roomId}/unarchive`, {
-      method: 'PUT',
+    fetch(`http://localhost:9000/admin/rooms/${roomId}/toggle`, {
+      method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({
-        isAvailable: !isAvailable
-      })
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`
+      }
     })
       .then(res => res.json())
       .then(data => {
 
-        if (data === true) {
+        if (data) {
           console.log(data);
 
           fetchData();
@@ -204,7 +200,7 @@ function AdminView(props) {
           Swal.fire({
             title: "Success",
             icon: "success",
-            text: "Course successfully unarchived."
+            text: "Room is now available"
           });
 
         } else {
@@ -258,6 +254,7 @@ function AdminView(props) {
               <Button
                 variant="danger"
                 size="sm"
+                className="ms-3"
                 onClick={() => archiveToggle(room._id, room.isAvailable)}
               >
                 Disable
@@ -266,6 +263,7 @@ function AdminView(props) {
               <Button
                 variant="success"
                 size="sm"
+                className="ms-3"
                 onClick={() => unarchiveToggle(room._id, room.isAvailable)}
               >
                 Enable
@@ -284,12 +282,16 @@ function AdminView(props) {
 
   }, [roomData, fetchData]);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <Fragment>
 
       <div className="text-center my-4">
-        <h2>Admin Dashboard</h2>
-        <div className="d-flex justify-content-center">
+        <h2>Room Dashboard</h2>
+        <div className="d-flex mt-3 justify-content-center">
           <Button variant="primary" onClick={openAdd}>Add New Room Listing</Button>
         </div>
       </div>
@@ -313,7 +315,7 @@ function AdminView(props) {
       <Modal show={showAdd} onHide={closeAdd}>
         <Form onSubmit={e => addRoom(e)}>
           <Modal.Header closeButton>
-            <Modal.Title>Add Course</Modal.Title>
+            <Modal.Title>Create New Listing</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Group controlId="courseName">
@@ -321,7 +323,7 @@ function AdminView(props) {
               <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} required />
             </Form.Group>
             <Form.Group controlId="courseshortAddress">
-              <Form.Label>shortAddress</Form.Label>
+              <Form.Label>Address</Form.Label>
               <Form.Control type="text" value={shortAddress} onChange={e => setAddress(e.target.value)} required />
             </Form.Group>
             <Form.Group controlId="coursePrice">
@@ -340,7 +342,7 @@ function AdminView(props) {
       <Modal show={showEdit} onHide={closeEdit}>
         <Form onSubmit={e => editRoom(e, roomId)}>
           <Modal.Header closeButton>
-            <Modal.Title>Edit Course</Modal.Title>
+            <Modal.Title>Edit Room Listing</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Group controlId="courseName">
@@ -348,7 +350,7 @@ function AdminView(props) {
               <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} required />
             </Form.Group>
             <Form.Group controlId="courseshortAddress">
-              <Form.Label>shortAddress</Form.Label>
+              <Form.Label>Address</Form.Label>
               <Form.Control type="text" value={shortAddress} onChange={e => setAddress(e.target.value)} required />
             </Form.Group>
             <Form.Group controlId="coursePrice">
