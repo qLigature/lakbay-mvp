@@ -1,12 +1,16 @@
-.loginCard {
+.regCard {
   max-width: 550px;
-  padding: 25px 60px 525px 60px;
-  margin: 125px 0px 285px 0px;
-  height: 550px;
+  padding: 40px 70px 625px 70px;
+  margin: 75px 0px 90px 0px;
+  height: 820px;
   background-color: white;
   border: 1px solid #c6c6c6;
   border-radius: 10px;
   box-shadow: 0px 10px 20px -4px rgba(0, 0, 0, 0.6);
   overflow: hidden;
   transition: transform 200ms ease-in;
+}
+
+.forms {
+  padding: 15px;
 }

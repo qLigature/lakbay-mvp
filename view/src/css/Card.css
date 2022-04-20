@@ -9,15 +9,15 @@
   transition: transform 200ms ease-in;
 }
 
-.cards:hover {
+.card:hover {
   /*width: auto;*/
   /*height: 500px;*/
   transform: scale(1.1);
 }
 
-.cards > img {
-  object-fit: fill;
-  min-width: 475px;
+.card > img {
+  object-fit: cover;
+  min-width: 675;
   min-height: 300px;
   width: 100%;
 }

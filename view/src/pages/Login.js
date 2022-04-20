@@ -93,7 +93,7 @@ function Login(props) {
   }, [email, password]);
 
   return (
-    <div className="loginCard col-12 p-2 my-3 mx-auto m-5">
+    <div className="loginCard col-12 mx-auto">
       <Form onSubmit={(e) => authenticate(e)}>
         <h1 className="m-3">Welcome</h1>
         <h4 className="m-3">Log in to dashboard</h4>
@@ -121,8 +121,8 @@ function Login(props) {
         <div className="d-flex justify-content-center">
           {isActive ? (
             <Button
-              className="mt-3 mb-2 px-5 rounded-pill btn-lg"
-              variant="danger"
+              className="mt-3 mb-2 px-5 my-3 rounded-pill btn-lg"
+              variant="primary"
               type="submit"
               id="submitBtn"
             >
@@ -131,7 +131,7 @@ function Login(props) {
           ) : (
             <Button
               className="mt-3 mb-2 px-5 rounded-pill btn-lg"
-              variant="secondary"
+              variant="danger"
               type="submit"
               id="submitBtn"
               disabled

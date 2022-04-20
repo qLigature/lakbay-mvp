@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
-
+import '../css/Register.css';
 
 function Register() {
-
   const { user } = useContext(UserContext);
 
   const history = useNavigate();
@@ -17,7 +16,7 @@ function Register() {
   const [mobileNo, setMobileNo] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [password2, setPassword2] = useState('');
+  const [password2, setPassword2] = useState('');
   const [isActive, setIsActive] = useState(false);
 
   function registerUser(e) {
@@ -36,15 +35,14 @@ function Register() {
         email: email,
         password: password
       })
-
     })
-      .then(res => {
+      .then((res) => {
         if (res.ok) {
           return res.json();
         }
         throw new Error('Network response was not ok.');
       })
-      .then(data => {
+      .then((data) => {
         console.log(data);
 
         Swal.fire({
@@ -60,11 +58,11 @@ function Register() {
         setMobileNo('');
         setEmail('');
         setPassword('');
+        setPassword2('');
 
-        history("/login");
-
+        history('/login');
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         Swal.fire({
           title: 'Something went wrong',
@@ -77,107 +75,134 @@ function Register() {
   }
 
   useEffect(() => {
-
-    if (firstName !== '' && lastName !== '' && address !== '' && mobileNo !== '' && email !== '' && password !== '') {
+    if (
+      firstName !== '' &&
+      lastName !== '' &&
+      address !== '' &&
+      mobileNo !== '' &&
+      email !== '' &&
+      password !== '' &&
+      password2 !== '' &&
+      password === password2
+    ) {
       setIsActive(true);
-
     } else {
       setIsActive(false);
     }
+  }, [firstName, lastName, mobileNo, email, password, password2]);
 
-  }, [firstName, lastName, mobileNo, email, password]);
+  return user.id !== null ? (
+    <Navigate to="/courses" />
+  ) : (
+    <div className="regCard col-md-6 mx-auto">
+      <Form onSubmit={(e) => registerUser(e)}>
+        <h1 className="px-3">Create an account</h1>
 
-  return (
-
-    (user.id !== null) ?
-      <Navigate to="/courses" />
-      :
-
-      <Form onSubmit={e => registerUser(e)}>
-        <h1>Register</h1>
-
-        <Form.Group controlId="firstName">
-          <Form.Label>First Name</Form.Label>
+        <Form.Group className="forms" controlId="firstName">
+          <Form.Label></Form.Label>
           <Form.Control
             type="text"
-            placeholder="Input your First Name here"
+            placeholder="First Name"
             value={firstName}
-            onChange={e => setFirstName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </Form.Group>
 
-        <Form.Group controlId="lastName">
-          <Form.Label>Last Name</Form.Label>
+        <Form.Group className="forms" controlId="lastName">
           <Form.Control
             type="text"
-            placeholder="Input your Last Name here"
+            placeholder="Last Name"
             value={lastName}
-            onChange={e => setLastName(e.target.value)}
+            onChange={(e) => setLastName(e.target.value)}
             required
           />
         </Form.Group>
 
-        <Form.Group controlId="address">
-          <Form.Label>Address</Form.Label>
+        <Form.Group className="forms" controlId="address">
           <Form.Control
             type="text"
-            placeholder="Input your Address here"
+            placeholder="Address"
             value={address}
-            onChange={e => setAddress(e.target.value)}
+            onChange={(e) => setAddress(e.target.value)}
             required
           />
         </Form.Group>
 
-        <Form.Group controlId="mobileNo">
-          <Form.Label>Mobile Number</Form.Label>
+        <Form.Group className="forms" controlId="mobileNo">
           <Form.Control
             type="text"
-            placeholder="Input your Mobile Number here"
+            placeholder="Mobile Number"
             value={mobileNo}
-            onChange={e => setMobileNo(e.target.value)}
+            onChange={(e) => setMobileNo(e.target.value)}
             required
           />
         </Form.Group>
 
-        <Form.Group controlId="userEmail">
-          <Form.Label>Email Address</Form.Label>
+        <Form.Group className="forms" controlId="userEmail">
           <Form.Control
             type="email"
-            placeholder="Enter your email here"
+            placeholder="Email Address"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
-
         </Form.Group>
 
-        <Form.Group controlId="password1">
-          <Form.Label>Password</Form.Label>
+        <Form.Group className="forms" controlId="password1">
           <Form.Control
             type="password"
-            placeholder="Input your password here"
+            placeholder="Password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </Form.Group>
 
+        <Form.Group className="forms" controlId="password2">
+          <Form.Control
+            type="password"
+            placeholder="Confirm Password"
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <p className=" px-3 my-3">
+          By creating an account, I agree to the Lakbay Terms and Conditions,
+          and Privacy Statement.
+        </p>
         {/*conditionally rendering submit button based on isActive state*/}
 
-        {isActive ?
-          <Button variant="primary" type="submit" id="submitBtn" className="mt-3 mb-3">
+        {isActive ? (
+          <Button
+            className="m-3 mt-4 mb-5 px-5 rounded-pill btn-lg"
+            variant="primary "
+            type="submit"
+            id="submitBtn"
+          >
             Submit
           </Button>
-          :
-          <Button variant="danger" type="submit" id="submitBtn" className="mt-3 mb-3" disabled>
+        ) : (
+          <Button
+            className="m-3 mt-4 mb-5 px-5 rounded-pill btn-lg"
+            variant="danger "
+            type="submit"
+            id="submitBtn"
+            disabled
+          >
             Submit
           </Button>
-        }
-
-
+        )}
       </Form>
-
+      <p className="px-5 mx-4">
+        Already have an account?
+        <Link className="m-2" to="/login" style={{ textDecoration: 'none' }}>
+          Sign in
+        </Link>
+      </p>
+    </div>
   );
 }
 
